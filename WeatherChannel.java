@@ -41,8 +41,7 @@ public class WeatherChannel {
         caps.setCapability("udid", "emulator-5554"); //DeviceId from "adb devices" command
         caps.setCapability("platformName", "Android");
         caps.setCapability("platformVersion", "9.0");
-        caps.setCapability("skipUnlock","true");
-        
+        caps.setCapability("skipUnlock","true");      
         caps.setCapability("appPackage", "com.weather.Weather");
 		//caps.setCapability("appActivity", "com.weather.Weather.daybreak.MainActivity");
         caps.setCapability("appActivity", "com.weather.Weather.app.SplashScreenActivity");
@@ -55,25 +54,21 @@ public class WeatherChannel {
     public  void basicTest () throws InterruptedException {
        
     	driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-    	driver.findElement(By.id("com.weather.Weather:id/txt_location_name")).click();
-    	driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+    	driver.findElement(By.id("com.weather.Weather:id/txt_location_name")).click(); 	
     	driver.findElement(By.id("com.weather.Weather:id/search_text")).sendKeys("Portland");
     	Thread.sleep(1000);
     	TouchAction t =new TouchAction(driver);	
     	t.tap(PointOption.point(975, 1700)).perform();
-    	driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+    	
     	//Find number of search results for 'Portland'  
     	int count=driver.findElements(By.id("com.weather.Weather:id/search_item_container")).size();
     	System.out.println("No of search results "+count);
     	 for(int i=0;i<count;i++) // loop through all the 'Portland' results and print them to the console
  	    {
-    		 driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-    		 driver.findElements(By.id("com.weather.Weather:id/search_item_container")).get(i).click();  		
-    		 driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-    		 driver.findElement(By.id("com.weather.Weather:id/txt_location_name")).click();
-    	    	driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    		 driver.findElements(By.id("com.weather.Weather:id/search_item_container")).get(i).click();  				 
+    		 driver.findElement(By.id("com.weather.Weather:id/txt_location_name")).click();    	
     	    	driver.findElement(By.id("com.weather.Weather:id/search_text")).sendKeys("Portland");
-    	    	Thread.sleep(1000);
+    	    	Thread.sleep(2000);
     	    	TouchAction y =new TouchAction(driver);	
     	    	y.tap(PointOption.point(975, 1700)).perform();
     	    	String temp= driver.findElementById("com.weather.Weather:id/current_conditions_temperature").getText();
@@ -82,14 +77,11 @@ public class WeatherChannel {
         		System.out.println(temp+" "+currentlocation+" "+currentPhrase);
         		System.out.println();       		
  	    }
-		Thread.sleep(5000);
 		driver.findElement(By.id("com.weather.Weather:id/txt_location_name")).click();
-    	driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     	driver.findElement(By.id("com.weather.Weather:id/search_text")).sendKeys("Portland");
-    	Thread.sleep(1000);
+    	Thread.sleep(2000);
     	TouchAction v =new TouchAction(driver);	
     	v.tap(PointOption.point(975, 1700)).perform();
-    	driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     	//Find current weather at PDX airport
     	driver.findElement(By.xpath("//*[@text='Portland International Airport']/parent::*")).click();
 	
