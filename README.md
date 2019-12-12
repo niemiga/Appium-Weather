@@ -7,3 +7,5 @@ no .apk file is needed
 Test searches for weather with the search term 'Portland'
 All results are entered and the current weather information (temp. etc.) is displayed in the console
 The weather for PDX airport is searched for and displayed in the app
+
+v. 2 removed several unecessary implicit wait statement
